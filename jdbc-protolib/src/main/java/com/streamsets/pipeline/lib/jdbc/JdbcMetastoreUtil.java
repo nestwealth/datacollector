@@ -107,4 +107,16 @@ public class JdbcMetastoreUtil {
     }
     return columnDiff;
   }
+
+  public static LinkedHashMap<String, JdbcTypeInfo> getUpdatedStructure(
+      LinkedHashMap<String, JdbcTypeInfo> oldState,
+      LinkedHashMap<String, JdbcTypeInfo> columnDiff
+  ) {
+    for (Map.Entry<String, JdbcTypeInfo> entry : columnDiff.entrySet()) {
+      String columnName = entry.getKey();
+      JdbcTypeInfo columnTypeInfo = entry.getValue();
+      oldState.put(columnName, columnTypeInfo);
+    }
+    return oldState;
+  }
 }
